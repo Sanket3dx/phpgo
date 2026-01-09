@@ -402,6 +402,12 @@ PHP_MINIT_FUNCTION(phpgo) {
     return SUCCESS;
 }
 
+/* PHP_MSHUTDOWN */
+PHP_MSHUTDOWN_FUNCTION(phpgo) {
+    zend_hash_destroy(&callback_registry);
+    return SUCCESS;
+}
+
 /* Function Registration */
 const zend_function_entry phpgo_functions[] = {
     ZEND_NS_NAMED_FE("phpgo", ping, zif_phpgo_ping, NULL)
@@ -423,7 +429,7 @@ zend_module_entry phpgo_module_entry = {
     "phpgo",
     phpgo_functions,
     PHP_MINIT(phpgo),
-    NULL,
+    PHP_MSHUTDOWN(phpgo),
     NULL,
     NULL,
     NULL,

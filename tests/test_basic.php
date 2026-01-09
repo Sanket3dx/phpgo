@@ -1,13 +1,15 @@
 <?php
 if (!extension_loaded('phpgo')) {
-    dl('phpgo.so');
+    // We expect it to be loaded via CLI flag
+    echo "Extension phpgo not loaded\n";
+    exit(1);
 }
 
 echo "Correctly loaded phpgo\n";
 
 // Test Channel
 $ch = phpgo\channel(2);
-echo "Created channel $ch\n";
+echo "Created channel: $ch\n";
 
 phpgo\send($ch, "Hello");
 phpgo\send($ch, 123);
@@ -37,5 +39,3 @@ $result = phpgo\select([
 
 echo "Select Result Index: " . $result['index'] . "\n";
 echo "Select Result Value: " . $result['value'] . "\n";
-
-?>

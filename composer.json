@@ -1,0 +1,25 @@
+{
+    "name": "sanket3dx/phpgo",
+    "description": "True Go Concurrency for PHP - Native Extension",
+    "type": "php-ext",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sanket Patil",
+            "email": "sanket@example.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0"
+    },
+    "autoload": {
+        "files": [
+            "src/php/ide_helper.php"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.0-dev"
+        }
+    }
+}

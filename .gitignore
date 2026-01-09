@@ -1,4 +1,5 @@
 
 *.o
 *.so
+!build/**/*.so
 src/go/libphpgo.h

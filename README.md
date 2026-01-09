@@ -22,6 +22,15 @@
 
 ## Installation
 
+### Option 1: Using Pre-compiled Binaries (Fastest)
+
+1. **Download** the `phpgo.so` and `libphpgo.v1.so` from the `build/` folder.
+2. **Copy to Extensions**: Move `phpgo.so` to your PHP extensions directory.
+3. **Copy to Library Path**: Move `libphpgo.v1.so` to `/usr/local/lib` and run `sudo ldconfig`.
+4. **Enable in PHP**: Add `extension=phpgo.so` to your `php.ini`.
+5. **Restart**: Restart your web server (e.g., `sudo systemctl restart php8.2-fpm`).
+
+### Option 2: Build from Source
 1. Clone the repository.
 2. Build the extension:
    ```bash

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>phpgo - True Go Concurrency for PHP</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --primary: #38bdf8;
+            --secondary: #818cf8;
+            --accent: #f472b6;
+            --code-bg: #1e293b;
+            --card-bg: #1e293b50;
+            --border: #334155;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        header {
+            text-align: center;
+            padding: 6rem 0;
+            background: radial-gradient(circle at top center, #1e293b 0%, transparent 70%);
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: #94a3b8;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-top: 2rem;
+        }
+
+        /* Code Blocks */
+        pre {
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        code {
+            font-family: 'Fira Code', 'Menlo', 'Monaco', monospace;
+            color: #a5b4fc;
+        }
+
+        .keyword {
+            color: #f472b6;
+        }
+
+        .function {
+            color: #38bdf8;
+        }
+
+        .string {
+            color: #a3e635;
+        }
+
+        .comment {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        /* About Author */
+        .author-section {
+            background: linear-gradient(to right, #1e293b, #0f172a);
+            padding: 3rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .author-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: #64748b;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Utility */
+        .highlight {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <h1>phpgo</h1>
+            <p class="tagline">True Go Concurrency for PHP</p>
+            <p style="margin-top:2rem">
+                <span
+                    style="background:var(--card-bg); padding:0.5rem 1rem; border-radius:2rem; font-size:0.9rem; border:1px solid var(--border)">
+                    v1.0.0 • Native Extension • Zero Magic
+                </span>
+            </p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <section id="introduction">
+            <h2>The Bridge to Parallelism</h2>
+            <p>
+                PHP has always been great, but true parallelism was missing.
+                <strong>phpgo</strong> changes that. It embeds the Go runtime directly into PHP, allowing you to spawn
+                lightweight goroutines, communicate via channels, and synchronize with WaitGroups—all using native PHP
+                syntax.
+            </p>
+        </section>
+
+        <section id="features">
+            <h2>Core Features</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Goroutines</h3>
+                    <p>Spawn thousands of concurrent tasks without blocking the main thread.</p>
+                    <code>phpgo\go(function() { ... });</code>
+                </div>
+                <div class="card">
+                    <h3>Channels</h3>
+                    <p>Safe communication between PHP and Go using typed channels.</p>
+                    <code>$ch = phpgo\channel();</code>
+                </div>
+                <div class="card">
+                    <h3>Select</h3>
+                    <p>Wait on multiple channel operations simultaneously.</p>
+                    <code>phpgo\select([...]);</code>
+                </div>
+                <div class="card">
+                    <h3>WaitGroups</h3>
+                    <p>Synchronize multiple goroutines with zero polling.</p>
+                    <code>$wg = new phpgo\WaitGroup();</code>
+                </div>
+            </div>
+        </section>
+
+        <section id="getting-started">
+            <h2>Getting Started</h2>
+            <p>Using <strong>phpgo</strong> is as intuitive as writing Go, but in PHP.</p>
+
+            <h3>1. The "Hello World" of Concurrency</h3>
+            <pre><code><span class="keyword">&lt;?php</span>
+
+<span class="comment">// Create a buffered channel</span>
+<span class="keyword">$ch</span> = <span class="function">phpgo\channel</span>(1);
+
+<span class="comment">// Spawn a Goroutine</span>
+<span class="function">phpgo\go</span>(<span class="keyword">function</span>() <span class="keyword">use</span> (<span class="keyword">$ch</span>) {
+    <span class="keyword">echo</span> <span class="string">"Hello from Goroutine!\n"</span>;
+    <span class="function">phpgo\send</span>(<span class="keyword">$ch</span>, <span class="string">"Task Complete"</span>);
+});
+
+<span class="comment">// Block main thread until message received</span>
+<span class="keyword">$msg</span> = <span class="function">phpgo\receive</span>(<span class="keyword">$ch</span>);
+<span class="keyword">echo</span> <span class="keyword">$msg</span>; <span class="comment">// Output: Task Complete</span>
+            </code></pre>
+
+            <h3>2. Using WaitGroups</h3>
+            <pre><code><span class="comment">// Initialize WaitGroup</span>
+<span class="keyword">$wg</span> = <span class="keyword">new</span> <span class="function">phpgo\WaitGroup</span>();
+
+<span class="keyword">for</span> (<span class="keyword">$i</span>=0; <span class="keyword">$i</span><3; <span class="keyword">$i</span>++) {
+    <span class="keyword">$wg</span>-><span class="function">add</span>(1); <span class="comment">// Increment counter</span>
+    
+    <span class="function">phpgo\go</span>(<span class="keyword">function</span>() <span class="keyword">use</span> (<span class="keyword">$wg</span>, <span class="keyword">$i</span>) {
+        <span class="keyword">echo</span> <span class="string">"Worker $i starting...\n"</span>;
+        <span class="comment">// Simulate work</span>
+        <span class="keyword">$wg</span>-><span class="function">done</span>(); <span class="comment">// Decrement counter</span>
+    });
+}
+
+<span class="keyword">$wg</span>-><span class="function">wait</span>(); <span class="comment">// Block until counter is 0</span>
+<span class="keyword">echo</span> <span class="string">"All workers done.\n"</span>;</code></pre>
+        </section>
+
+        <section id="use-cases">
+            <h2>Real World Use Cases</h2>
+
+            <h3>Use Case 1: Fan-In Data Aggregation</h3>
+            <p>Collect data from multiple sources simultaneously and process them as they arrive.</p>
+            <pre><code><span class="keyword">$ch1</span> = <span class="function">phpgo\channel</span>();
+<span class="keyword">$ch2</span> = <span class="function">phpgo\channel</span>();
+
+<span class="comment">// Simulate API Calls</span>
+<span class="function">phpgo\go</span>(fn() => <span class="function">phpgo\send</span>(<span class="keyword">$ch1</span>, <span class="string">"Data from API A"</span>));
+<span class="function">phpgo\go</span>(fn() => <span class="function">phpgo\send</span>(<span class="keyword">$ch2</span>, <span class="string">"Data from API B"</span>));
+
+<span class="keyword">for</span> (<span class="keyword">$i</span>=0; <span class="keyword">$i</span><2; <span class="keyword">$i</span>++) {
+    <span class="keyword">$res</span> = <span class="function">phpgo\select</span>([
+        <span class="function">phpgo\case_recv</span>(<span class="keyword">$ch1</span>),
+        <span class="function">phpgo\case_recv</span>(<span class="keyword">$ch2</span>)
+    ]);
+    <span class="keyword">echo</span> <span class="keyword">$res</span>['value'] . <span class="string">"\n"</span>;
+}</code></pre>
+
+            <h3>Use Case 2: Worker Pools</h3>
+            <p>Process a queue of jobs using a fixed number of workers to manage load.</p>
+            <pre><code><span class="keyword">$jobs</span> = <span class="function">phpgo\channel</span>(100);
+<span class="keyword">$results</span> = <span class="function">phpgo\channel</span>(100);
+
+<span class="comment">// Start 3 workers</span>
+<span class="keyword">for</span> (<span class="keyword">$w</span>=1; <span class="keyword">$w</span>&lt;=3; <span class="keyword">$w</span>++) {
+    <span class="function">phpgo\go</span>(<span class="keyword">function</span>() <span class="keyword">use</span> (<span class="keyword">$jobs</span>, <span class="keyword">$results</span>, <span class="keyword">$w</span>) {
+        <span class="keyword">while</span>(<span class="keyword">true</span>) {
+            <span class="keyword">$job</span> = <span class="function">phpgo\receive</span>(<span class="keyword">$jobs</span>);
+            <span class="keyword">if</span> (<span class="keyword">$job</span> === <span class="keyword">null</span>) <span class="keyword">break</span>; <span class="comment">// Channel closed</span>
+            <span class="comment">// Process...</span>
+            <span class="function">phpgo\send</span>(<span class="keyword">$results</span>, <span class="string">"Worker $w finished $job"</span>);
+        }
+    });
+}</code></pre>
+        </section>
+
+        <section id="challenges">
+            <h2>Challenges & Solutions</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>The Type Gap</h3>
+                    <p><strong>Challenge:</strong> PHP uses dynamic <code>zval</code> structures while Go relies on
+                        strict static typing. Passing objects directly translates to segfaults.</p>
+                    <p><strong>Solution:</strong> We built a robust <strong>C-Glue Layer</strong>. It intercepts PHP
+                        calls, validates arguments using `zend_parse_parameters`, and essentially "marshals" data into
+                        safe C types that Go can digest.</p>
+                </div>
+                <div class="card">
+                    <h3>Memory Ownership</h3>
+                    <p><strong>Challenge:</strong> PHP's Zend Engine and Go's Runtime both have aggressive Garbage
+                        Collectors. Who owns the memory meant race conditions.</p>
+                    <p><strong>Solution:</strong> <strong>Deep Copying & Handle Pattern</strong>. We copy scalar data
+                        into new memory blocks when sending to Go. For complex objects (Channels), we keep them in Go
+                        and only give PHP an integer "Handle".</p>
+                </div>
+                <div class="card">
+                    <h3>The Runtime Clash</h3>
+                    <p><strong>Challenge:</strong> PHP is single-threaded by design. Go is multi-threaded. Calling PHP
+                        functions from a Goroutine is technically "illegal" in standard NTS builds.</p>
+                    <p><strong>Solution:</strong> We implemented a <strong>Callback Registry</strong>. While
+                        experimental in NTS, it maps integer IDs to PHP callables, allowing Go to request execution.
+                        (Note: ZTS is recommended for stability).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="author" class="author-section">
+            <p>Crafted with obsession by</p>
+            <div class="author-name">Sanket Patil</div>
+            <p style="max-width: 600px; margin: 1rem auto; color: #94a3b8;">
+                Passionate about bridging the gap between high-performance systems and developer ergonomics.
+                Creator of <strong>phpgo</strong> to prove that PHP developers deserve valid concurrency primitives.
+            </p>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 phpgo. Released under MIT License.</p>
+    </footer>
+
+</body>
+
+</html>

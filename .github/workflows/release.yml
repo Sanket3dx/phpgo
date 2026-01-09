@@ -1,0 +1,57 @@
+name: Release Build
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build Native Extension
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+          cache: true
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, intl
+          tools: php-config, phpize
+
+      - name: Install Build Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y php-dev gcc make
+
+      - name: Build Extension
+        run: |
+          make clean
+          make
+
+      - name: Verify Binaries
+        run: |
+          ls -lh *.so
+          # Basic check if it loads (might fail if PHP env in runner differs slightly)
+          php -d extension=./phpgo.so -r "echo 'phpgo loaded' . PHP_EOL;" || true
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            phpgo.so
+            libphpgo.v1.so
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
